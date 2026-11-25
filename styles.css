@@ -163,6 +163,52 @@ body {
   gap: 10px;
 }
 
+.dev-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 15px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.dev-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
+.dev-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.dev-name {
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: linear-gradient(90deg, #ffffff 0%, #fde68a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 860px) {
+  .topbar-inner {
+    flex-wrap: wrap;
+  }
+  .dev-credit {
+    order: 3;
+  }
+}
+
 .topbar .btn-glass {
   background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
