@@ -166,38 +166,39 @@ body {
 .dev-credit {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 15px;
+  gap: 9px;
+  padding: 8px 20px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.26);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  background: rgba(15, 23, 42, 0.42);
+  border: 1.5px solid rgba(253, 224, 71, 0.45);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 18px rgba(251, 191, 36, 0.16);
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   white-space: nowrap;
 }
 
 .dev-dot {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: #34d399;
-  box-shadow: 0 0 8px #34d399;
+  box-shadow: 0 0 10px #34d399;
 }
 
 .dev-label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .dev-name {
-  font-size: 0.84rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  letter-spacing: 0.05em;
-  background: linear-gradient(90deg, #ffffff 0%, #fde68a 100%);
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, #fef08a 0%, #fbbf24 45%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.35));
 }
 
 @media (max-width: 860px) {
