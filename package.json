@@ -1,0 +1,9 @@
+{
+  "name": "yt-text-checker",
+  "version": "1.0.0",
+  "description": "YT Text Checker - Free YouTube Policy Checker & Safe Word Correction Tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

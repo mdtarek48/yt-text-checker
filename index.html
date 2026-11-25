@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YT Text Checker — Free YouTube Policy & Word Correction Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 28 28" width="24" height="24" fill="none">
+            <rect x="2" y="5" width="24" height="18" rx="6" fill="url(#ytGrad)" />
+            <path d="M11.5 10.2L18 14L11.5 17.8V10.2Z" fill="#FFFFFF" />
+            <defs>
+              <linearGradient id="ytGrad" x1="2" y1="5" x2="26" y2="23" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF1E42" />
+                <stop offset="1" stop-color="#CC0022" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title-row">
+            <h1 class="brand-title">YT Text Checker</h1>
+            <span class="free-tag">100% FREE</span>
+          </div>
+          <p class="brand-subtitle">YouTube Policy Guard &amp; Smart Word Correction Studio</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="btnAiSettings" class="btn btn-glass" type="button" title="ঐচ্ছিক ফ্রি AI সেটিংস">
+          <span class="spark-icon">✨</span>
+          <span>Free Gemini AI</span>
+          <span id="aiBadge" class="badge badge-muted">Off</span>
+        </button>
+        <button id="btnThemeToggle" class="btn btn-icon" type="button" aria-label="Toggle Dark/Light Theme" title="থিম পরিবর্তন করুন">
+          🌙
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-shell">
+    <!-- Quick Overview Strip -->
+    <section class="studio-strip" aria-label="Quick Summary">
+      <div class="strip-text">
+        <span class="strip-pill">🛡️ Community &amp; Monetization Pre-Check</span>
+        <p>আপনার ভিডিও স্ক্রিপ্ট, টাইটেল বা ডেসক্রিপশন আপলোডের আগেই যাচাই করুন এবং ঝুঁকিপূর্ণ শব্দ এক ক্লিকে নিরাপদ শব্দে বদলে নিন।</p>
+      </div>
+      <div class="strip-metrics">
+        <div class="metric-box">
+          <span class="metric-label">মোট শব্দ</span>
+          <strong id="metricWords">0</strong>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">বক্তব্যের সময়</span>
+          <strong id="metricReadTime">0 সে.</strong>
+        </div>
+        <div class="metric-box">
+          <span class="metric-label">ঝুঁকিপূর্ণ শব্দ</span>
+          <strong id="metricIssues" class="metric-danger">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-layout">
+      <!-- Left Column: Editor & Highlighted Preview -->
+      <section class="panel editor-panel">
+        <div class="panel-header">
+          <div class="content-types" role="tablist" aria-label="Content Type">
+            <button class="tab-btn active" data-type="script" type="button">
+              <span>📝</span> Video Script
+            </button>
+            <button class="tab-btn" data-type="title" type="button">
+              <span>🏷️</span> Video Title
+            </button>
+            <button class="tab-btn" data-type="description" type="button">
+              <span>📄</span> Description
+            </button>
+            <button class="tab-btn" data-type="tags" type="button">
+              <span>🔖</span> Tags
+            </button>
+          </div>
+          <div class="editor-tools">
+            <button id="btnSample" class="btn btn-sm btn-soft" type="button">✨ ডেমো টেক্সট</button>
+            <button id="btnUndo" class="btn btn-sm btn-ghost" type="button" disabled>↩ Undo</button>
+            <button id="btnClear" class="btn btn-sm btn-ghost" type="button">🗑 Clear</button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <label for="inputText" class="sr-only">YouTube Text Input</label>
+          <textarea
+            id="inputText"
+            placeholder="এখানে আপনার YouTube Video Script, Title, Description বা Tags লিখুন বা পেস্ট করুন (বাংলা, ইংরেজি বা বাংলিশ)..."
+            spellcheck="false"
+          ></textarea>
+          <div class="editor-meta">
+            <span id="charCounter">0 / 50000 অক্ষর (Script)</span>
+            <span id="wordCounter">0 শব্দ • ~0 সেকেন্ড স্পিচ</span>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button id="btnCheck" class="btn btn-primary btn-glow" type="button">
+            🔍 পলিসি চেক করুন
+          </button>
+          <button id="btnAiCheck" class="btn btn-secondary" type="button">
+            ✨ AI Deep Check (Free)
+          </button>
+          <button id="btnCopy" class="btn btn-outline" type="button">
+            📋 সংশোধিত টেক্সট কপি
+          </button>
+        </div>
+
+        <!-- Highlighted Preview Box -->
+        <div class="preview-card">
+          <div class="preview-header">
+            <div class="preview-title-wrap">
+              <h2>লাইভ হাইলাইট প্রিভিউ</h2>
+              <span class="preview-hint">লাল/হলুদ শব্দে ক্লিক করলে ডানপাশে সাজেশন পাবেন</span>
+            </div>
+            <div class="legend">
+              <span class="legend-item"><i class="dot dot-high"></i> High Risk</span>
+              <span class="legend-item"><i class="dot dot-medium"></i> Yellow $</span>
+              <span class="legend-item"><i class="dot dot-low"></i> Clickbait</span>
+            </div>
+          </div>
+          <div id="highlightedPreview" class="highlighted-preview empty-state">
+            টেক্সট লিখলে বা পেস্ট করলে ঝুঁকিপূর্ণ শব্দগুলো এখানে তাৎক্ষণিকভাবে রঙ দিয়ে চিহ্নিত হবে।
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Score, Issues & 1-Click Correction -->
+      <aside class="panel results-panel">
+        <div class="score-card">
+          <div class="score-ring-wrap">
+            <svg class="score-svg" viewBox="0 0 88 88" width="88" height="88" aria-hidden="true">
+              <circle class="ring-track" cx="44" cy="44" r="37" />
+              <circle id="scoreRing" class="ring-progress safe" cx="44" cy="44" r="37" />
+            </svg>
+            <div id="scoreCircle" class="score-center safe">
+              <span id="scoreValue">100</span>
+              <small>/100</small>
+            </div>
+          </div>
+          <div class="score-info">
+            <div id="statusBadge" class="status-pill safe">Ready to Check</div>
+            <h2 id="statusHeadline">টেক্সট যাচাই করতে প্রস্তুত</h2>
+            <p id="statusSummary">আপনার ভিডিও স্ক্রিপ্ট বা টাইটেল দিন এবং ঝুঁকিপূর্ণ শব্দগুলো এক ক্লিকে নিরাপদ শব্দে ঠিক করুন।</p>
+          </div>
+        </div>
+
+        <div class="issues-toolbar">
+          <h3>শনাক্তকৃত সমস্যা <span class="count-chip" id="issueCount">0</span></h3>
+          <button id="btnFixAll" class="btn btn-sm btn-fix-all" type="button" disabled>
+            ⚡ সব কারেকশন করুন (Fix All)
+          </button>
+        </div>
+
+        <div class="filter-pills" id="categoryFilters">
+          <button class="filter-pill active" data-filter="all" type="button">সব</button>
+          <button class="filter-pill" data-filter="high" type="button">High Risk</button>
+          <button class="filter-pill" data-filter="medium" type="button">Yellow $</button>
+          <button class="filter-pill" data-filter="low" type="button">Clickbait</button>
+        </div>
+
+        <div id="issuesList" class="issues-list">
+          <div class="empty-issues">
+            <div class="empty-icon">🛡️</div>
+            <p>এখনো কোনো ঝুঁকিপূর্ণ শব্দ পাওয়া যায়নি</p>
+            <small>টিপস: দ্রুত পরীক্ষা করতে বামপাশে <strong>"✨ ডেমো টেক্সট"</strong> বাটনে ক্লিক করুন।</small>
+          </div>
+        </div>
+
+        <!-- AI Result Section -->
+        <div id="aiResultCard" class="ai-result-card hidden">
+          <div class="ai-result-header">
+            <h3>✨ AI Deep Analysis</h3>
+            <button id="btnApplyAiRewrite" class="btn btn-sm btn-primary hidden" type="button">AI সাজেশন ব্যবহার করুন</button>
+          </div>
+          <div id="aiResultBody" class="ai-result-body"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer container">
+    <p>
+      <strong>YT Text Checker</strong> — এটি YouTube-এর প্রকাশিত Community Guidelines, Advertiser-Friendly Guidelines ও Spam Policy অনুযায়ী একটি ফ্রি প্রি-চেক সহকারী টুল। এটি অফিশিয়াল YouTube API নয়; চূড়ান্ত রিভিউ YouTube-এর নিজস্ব সিস্টেমের ওপর নির্ভর করে।
+    </p>
+  </footer>
+
+  <!-- Optional Free Gemini AI Modal -->
+  <div id="aiModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+    <div class="modal-backdrop" id="aiModalBackdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="aiModalTitle">✨ ফ্রি AI Deep Check সেটআপ (ঐচ্ছিক)</h2>
+        <button id="btnCloseModal" class="btn btn-icon" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">
+          লোকাল পলিসি চেকার কোনো API ছাড়াই সম্পূর্ণ ফ্রিতে চলে। তবে পুরো বাক্যের অর্থ (Context) এবং স্মার্ট বাংলা/ইংরেজি রি-রাইটিংয়ের জন্য আপনি <strong>Google Gemini API (Free Tier)</strong> যুক্ত করতে পারেন।
+        </p>
+        <ol class="modal-steps">
+          <li>Google AI Studio (<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">aistudio.google.com/apikey</a>) থেকে একটি ফ্রি API Key তৈরি করুন।</li>
+          <li>নিচের বক্সে Key-টি দিন (এটি শুধু আপনার ব্রাউজারে সেভ থাকবে, অন্য কোথাও পাঠানো হবে না)।</li>
+        </ol>
+        <div class="form-group">
+          <label for="geminiKeyInput">Gemini API Key (Free Tier)</label>
+          <input id="geminiKeyInput" type="password" placeholder="AIzaSy..." autocomplete="off" />
+        </div>
+        <div class="modal-actions">
+          <button id="btnRemoveKey" class="btn btn-ghost" type="button">Key মুছুন</button>
+          <button id="btnSaveKey" class="btn btn-primary" type="button">Save করুন</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
