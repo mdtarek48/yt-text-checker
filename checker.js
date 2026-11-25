@@ -2,7 +2,7 @@
 
 (function () {
   const LIMITS = {
-    script: { max: 50000, label: 'Script' },
+    script: { max: null, label: 'Unlimited' },
     title: { max: 100, label: 'Title Limit' },
     description: { max: 5000, label: 'Description Limit' },
     tags: { max: 500, label: 'Tags Limit' },
@@ -122,8 +122,13 @@
     const words = text.trim() ? text.trim().split(/\s+/).length : 0;
     const speechTime = formatSpeechTime(words);
 
-    charCounter.textContent = `${len} / ${limit.max} অক্ষর (${limit.label})`;
-    charCounter.classList.toggle('over-limit', len > limit.max);
+    if (limit.max) {
+      charCounter.textContent = `${len} / ${limit.max} অক্ষর (${limit.label})`;
+      charCounter.classList.toggle('over-limit', len > limit.max);
+    } else {
+      charCounter.textContent = `${len} অক্ষর (${limit.label})`;
+      charCounter.classList.remove('over-limit');
+    }
     wordCounter.textContent = `${words} শব্দ • ~${speechTime} স্পিচ`;
 
     metricWords.textContent = words;
@@ -173,7 +178,7 @@
     }
 
     const limit = LIMITS[currentType].max;
-    if (text.length > limit) penalty += 5;
+    if (limit && text.length > limit) penalty += 5;
 
     const capsWords = text.match(/\b[A-Z]{4,}\b/g) || [];
     if (capsWords.length >= 3) penalty += 8;
